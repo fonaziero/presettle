@@ -29,6 +29,8 @@
         <!-- Versions checked against Spring Boot 4 in docs/adr/0007-java-25-and-spring-boot-4.md -->
         <spring-modulith.version>2.1.1</spring-modulith.version>
         <springdoc.version>3.1.1</springdoc.version>
+        <!-- Uses XJC 4.0.9, the same JAXB version the Spring Boot BOM manages for the runtime (ADR 0010) -->
+        <jaxb-maven-plugin.version>4.0.16</jaxb-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -74,6 +76,10 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -107,6 +113,28 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- Generates JAXB classes from the official pacs.008 schema into the ingestion module (ADR 0010) -->
+            <plugin>
+                <groupId>org.jvnet.jaxb</groupId>
+                <artifactId>jaxb-maven-plugin</artifactId>
+                <version>${jaxb-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-pacs008</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaDirectory>src/main/resources/iso20022</schemaDirectory>
+                            <schemaIncludes>
+                                <include>pacs.008.001.08.xsd</include>
+                            </schemaIncludes>
+                            <generatePackage>io.github.fonaziero.presettle.ingestion.pacs008</generatePackage>
+                            <noFileHeader>true</noFileHeader>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

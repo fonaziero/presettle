@@ -4,3 +4,6 @@
 # Windows-only scripts keep CRLF
 *.bat text eol=crlf
 *.cmd text eol=crlf
+
+# Official ISO 20022 schemas are kept byte-for-byte as published (checksums in their README)
+backend/src/main/resources/iso20022/*.xsd -text
