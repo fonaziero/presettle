@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: presettle
+  datasource:
+    # Defaults match compose.yaml (demo credentials only); override with environment variables.
+    url: ${PRESETTLE_DB_URL:jdbc:postgresql://localhost:5432/presettle}
+    username: ${PRESETTLE_DB_USERNAME:presettle}
+    password: ${PRESETTLE_DB_PASSWORD:presettle}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
