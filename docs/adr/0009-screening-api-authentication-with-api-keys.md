@@ -14,6 +14,12 @@ stay simple.
 - Clients authenticate with an API key sent in the `X-API-Key` request header.
 - Keys are defined in configuration, each with a client id. Configuration holds only the SHA-256 hash
   of each key, never the key itself. Keys are long random values, so a fast hash is enough.
+- Keys have the format `pst_` followed by 32 random bytes (256 bits) encoded as base64url without
+  padding, e.g. `pst_` + 43 characters. The prefix makes a key recognizable in logs, config files and
+  commits, so leaks can be caught by secret scanners with the pattern `pst_[A-Za-z0-9_-]{43}`
+  (e.g. a GitHub secret scanning custom pattern).
+- Keys and their hashes are generated with [`scripts/generate-api-key.sh`](../../scripts/generate-api-key.sh).
+  The hash covers the whole key, prefix included.
 - Several keys can be active at once, so a key can be rotated without downtime.
 - Keys are compared in constant time and are never logged. A missing or unknown key gets `401`.
 - The client id is stored with every screening.
