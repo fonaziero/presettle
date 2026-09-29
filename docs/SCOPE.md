@@ -64,12 +64,17 @@ Quality, tests and documentation take priority over feature count.
   institution's compliance program.
 
 ## Out of scope for v1 (public roadmap)
+
+### v1.1
+- Accept the Business Application Header (`AppHdr`, `head.001`) envelope. FedNow sends every message
+  with it, while v1 accepts only the `pacs.008` `Document`
+  ([ADR 0010](adr/0010-pacs008-parsing-with-jaxb-and-xsd-validation.md)).
+
+### Later
 - Inbound payment screening (e.g. detecting money-mule accounts receiving scam proceeds).
 - Editing rules through the UI.
 - ML or statistical scoring.
 - Generating `pacs.002` status responses or connecting to real FedNow infrastructure.
-- Accepting the Business Application Header (`AppHdr`, `head.001`) envelope; v1 accepts only the
-  `pacs.008` `Document` ([ADR 0010](adr/0010-pacs008-parsing-with-jaxb-and-xsd-validation.md)).
 - Sanctions screening (OFAC) and fuzzy name matching.
 - Multi-tenancy, SSO, role-based access.
 - Kafka or other queues, webhooks, case management, regulatory reporting (SAR), Helm/Kubernetes.
