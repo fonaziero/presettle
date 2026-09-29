@@ -1,0 +1,32 @@
+# Local demo stack. Credentials are for local demo use only.
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: presettle
+      POSTGRES_USER: presettle
+      POSTGRES_PASSWORD: presettle
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U presettle -d presettle"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: ./backend
+    environment:
+      PRESETTLE_DB_URL: jdbc:postgresql://db:5432/presettle
+      PRESETTLE_DB_USERNAME: presettle
+      PRESETTLE_DB_PASSWORD: presettle
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-data:
