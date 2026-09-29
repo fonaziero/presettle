@@ -1,4 +1,8 @@
-# Project context
+# Presettle: project context
+
+- Project name: **Presettle**. Repository: https://github.com/fonaziero/presettle
+- FedNow is target context only (an example of an instant payment rail), never the project's name
+  or a claim of FedNow conformance.
 
 ## About me
 - Victor, Full Stack Developer (~5 years), Brazil.
@@ -9,7 +13,7 @@
 - I work full time, so this project moves at roughly 5-8 hours per week. Prefer small, shippable steps.
 
 ## Goal of this project
-An open-source tool to help smaller financial institutions (credit unions, community banks) adopt
+Presettle is an open-source tool to help smaller financial institutions (credit unions, community banks) adopt
 instant payments (e.g. the US FedNow Service) safely, focused on **pre-settlement fraud checks**.
 Instant payments settle in seconds and losses are hard to recover, so checks must run before settlement.
 

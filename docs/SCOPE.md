@@ -1,4 +1,4 @@
-# v1 Scope
+# Presettle v1 Scope
 
 **Promise of v1:** with a single `docker compose up`, a small financial institution can watch ISO 20022
 `pacs.008` payments being screened by configurable fraud rules, and an analyst can review the flagged ones
@@ -58,9 +58,9 @@ Quality, tests and documentation take priority over feature count.
 
 ## Disclaimers (must appear in the README)
 - **FedNow-oriented, not certified.** FedNow's own ISO 20022 specifications are available only to
-  participants (via MyStandards). This project uses the public `pacs.008.001.08` schema and makes no
+  participants (via MyStandards). Presettle uses the public `pacs.008.001.08` schema and makes no
   claim of FedNow conformance.
-- **Decision support, not compliance.** The tool supports fraud decisions; it does not replace an
+- **Decision support, not compliance.** Presettle supports fraud decisions; it does not replace an
   institution's compliance program.
 
 ## Out of scope for v1 (public roadmap)
